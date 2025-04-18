@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AddressListElement extends StatelessWidget {
-  const AddressListElement({super.key});
+class PlaceListElement extends StatelessWidget {
+  const PlaceListElement({super.key});
 
   @override
   Widget build(BuildContext context) {
