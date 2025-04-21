@@ -17,7 +17,7 @@ class NaverPlaceRepository {
 
   Dio get client => _client;
 
-  Future<List<Place>?> getPlaceByText(String text) async {
+  Future<List<Place>> getPlaceByText(String text) async {
     final response = await client.get(
       '/search/local.json'
       ,queryParameters: {
@@ -28,14 +28,13 @@ class NaverPlaceRepository {
     );
     if(response.statusCode == 200){
       final content = response.data['items'];
-      
       return List.from(content).map(
         (e) {
           return Place.fromJson(e);
         },
       ).toList();
     }
-    return null;
+    return [];
   }
 }
   // {

@@ -6,4 +6,5 @@ class Address {
     required this.address, 
     required this.roadAddress
   });
+  
 }
