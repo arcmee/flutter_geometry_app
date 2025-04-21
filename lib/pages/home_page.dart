@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_geometry_app/core/geolocator.dart';
 import 'package:flutter_geometry_app/data/model/place.dart';
 import 'package:flutter_geometry_app/pages/widget/place_list_widget.dart';
 import 'package:flutter_geometry_app/pages/widget/viewmodel/place_list_view_model.dart';
+import 'package:flutter_geometry_app/pages/widget/viewmodel/vworld_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -23,6 +25,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     List<Place> places = ref.watch(placeListNotifier);
+    final vworldvm = ref.watch(vworldNotifier.notifier);
     return Scaffold(
       appBar: AppBar(
         title: TextField(
@@ -31,6 +34,13 @@ class _HomePageState extends ConsumerState<HomePage> {
           },
           controller: controller,
         ),
+        actions: [
+          IconButton(onPressed: () async {
+            final position = await GeolocatorHelper.getPositon();
+            final positionNames = await vworldvm.getByLatLng(position!);
+            ref.read(placeListNotifier.notifier).searchByText(positionNames.first);
+          }, icon: Icon(Icons.gps_fixed))
+        ],
         centerTitle: true,
       ),
       body: PlaceListWidget(places),
