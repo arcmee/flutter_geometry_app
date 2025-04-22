@@ -12,7 +12,6 @@ class PlaceListNotifier extends AutoDisposeNotifier<List<Place>> {
   }
 
   Future<void> searchByText(String text) async {
-    print(text);
     state = await repository.getPlaceByText(text);
   }
 
