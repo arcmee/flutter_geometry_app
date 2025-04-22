@@ -8,7 +8,6 @@ class VworldNotifier extends StateNotifier<List<String>>{
 
   Future<List<String>> getByLatLng(Position position) async{
     final places = repository.getByLatlng(position);
-    print(places);
     return places;
   }
 }
